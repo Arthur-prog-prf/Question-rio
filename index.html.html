@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Aprovação v4</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="antialiased">
+
+    <div class="flex h-screen bg-color">
+        <!-- Sidebar -->
+        <aside id="sidebar" class="sidebar w-64 flex-shrink-0 flex flex-col p-4 transition-all">
+            <div class="text-2xl font-bold text-primary mb-10 px-2">Painel<span style="color: var(--accent-color);">.Aprovação</span></div>
+            <nav class="flex flex-col gap-2">
+                 <button id="nav-hoje" class="nav-link flex items-center gap-3 px-3 py-2 rounded-lg font-semibold">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    Hoje
+                </button>
+                <button id="nav-edital" class="nav-link flex items-center gap-3 px-3 py-2 rounded-lg font-semibold">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+                    Edital
+                </button>
+                <button id="nav-planejamento" class="nav-link flex items-center gap-3 px-3 py-2 rounded-lg font-semibold">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                    Planejamento
+                </button>
+                 <button id="nav-estatisticas" class="nav-link flex items-center gap-3 px-3 py-2 rounded-lg font-semibold">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                    Estatísticas
+                </button>
+                <button id="nav-conquistas" class="nav-link flex items-center gap-3 px-3 py-2 rounded-lg font-semibold">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                    Conquistas
+                </button>
+            </nav>
+            <div class="mt-auto px-2">
+                <button id="theme-toggle" class="w-full flex items-center gap-3 text-left p-2 rounded-lg font-semibold hover:bg-gray-100 dark:hover:bg-gray-700/50">
+                    <!-- Icon will be inserted by JS -->
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-8 overflow-y-auto">
+            <header class="mb-8 flex justify-between items-start">
+                <div>
+                    <h1 id="page-title" class="text-4xl font-extrabold text-primary"></h1>
+                    <p id="page-subtitle" class="text-lg mt-1"></p>
+                </div>
+                <div id="header-actions"></div>
+            </header>
+            
+            <div id="hoje-view" class="view"></div>
+            <div id="edital-view" class="view"></div>
+            <div id="planejamento-view" class="view"></div>
+            <div id="estatisticas-view" class="view"></div>
+            <div id="conquistas-view" class="view"></div>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <div id="modal" class="modal-overlay"></div>
+    
+    <script type="module" src="js/config/constants.js"></script>
+    <script type="module" src="js/config/icons.js"></script>
+    <script type="module" src="js/modules/utils.js"></script>
+    <script type="module" src="js/modules/data-manager.js"></script>
+    <script type="module" src="js/modules/theme-manager.js"></script>
+    <script type="module" src="js/modules/modals.js"></script>
+    <script type="module" src="js/modules/views/hoje-view.js"></script>
+    <script type="module" src="js/modules/views/edital-view.js"></script>
+    <script type="module" src="js/modules/views/planejamento-view.js"></script>
+    <script type="module" src="js/modules/views/estatisticas-view.js"></script>
+    <script type="module" src="js/modules/views/conquistas-view.js"></script>
+    <script type="module" src="js/modules/navigation.js"></script>
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>
